@@ -76,7 +76,7 @@ namespace AgriEnergyConnectPOE
                     adminUser.Email = email;
                     adminUser.FirstName = "Big";
                     adminUser.Surname = "Guy";
-                   // adminUser.UserName = "Big Guy";
+                    adminUser.UserName = email;
 
                     var result = await userManager.CreateAsync(adminUser, password);
                     if (!result.Succeeded)
@@ -88,7 +88,6 @@ namespace AgriEnergyConnectPOE
 
                 }
                 
-               
             }
 
             app.Run();

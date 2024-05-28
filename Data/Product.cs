@@ -10,6 +10,8 @@
         public int CategoryId { get; set; }  // Foreign Key to Category
         public DateTime ProductionDate { get; set; }
 
+        public string ImagePath { get; set; }
+
         public ApplicationUser User { get; set; }
         public Category Category { get; set; }
     }

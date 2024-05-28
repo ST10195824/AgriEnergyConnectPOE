@@ -4,10 +4,11 @@
     ViewData["Title"] = "Register";
 }
 
-<h1>@ViewData["Title"]</h1>
 
-<div class="row">
-    <div class="col-md-4">
+
+<div class="row justify-content-center">
+    <div class="col-md-4 text-center">
+        <h1>@ViewData["Title"]</h1>
         <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
             <h2>Create a new account.</h2>
             <hr />
@@ -41,12 +42,12 @@
             <div class="form-floating mb-3">
                 <select asp-for="Input.Role" class="form-control" aria-required="true">
                     <option value="">Select a role</option>
-                   @*  @foreach (var role in Model.Input.Roles)
+                    @foreach (var role in Model.Input.Roles)
                     {
                         <option value="@role.Value">@role.Text</option>
-                    } *@
-                    <option value="Farmer">Farmer</option>
-                    <option value="Employee">Employee</option>
+                    }
+                    @* <option value="Farmer">Farmer</option>
+                    <option value="Employee">Employee</option> *@
                 </select>
                 <label asp-for="Input.Role">Role</label>
                 <span asp-validation-for="Input.Role" class="text-danger"></span>
@@ -54,7 +55,15 @@
             <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
         </form>
     </div>
+   
+
 </div>
+<br />
+<br />
+<br />
+<br />
+<br />
+
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

@@ -9,40 +9,77 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-   @*  <link rel="stylesheet" href="~/AgriEnergyConnectPOE.styles.css" asp-append-version="true" /> *@
+    @*  <link rel="stylesheet" href="~/AgriEnergyConnectPOE.styles.css" asp-append-version="true" /> *@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container px-4 px-lg-5">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">AgriEnergyConnectPOE</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            if (User.IsInRole("Employee"))
+                            {
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Admin Dashboard</a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <li><a class="dropdown-item" asp-area="" asp-controller="Dashboard" asp-action="Index">Main Dashboard</a></li>
+                                        <li><a class="dropdown-item" asp-area="" asp-controller="Dashboard" asp-action="AddFarmer">Register a Farmer</a></li>
+                                        <li><hr class="dropdown-divider" /></li>
+                                        <li><a class="dropdown-item">Ban a Farmer</a></li>
+                                        <li><a class="dropdown-item">Ban a Listing</a></li>
+                                    </ul>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-controller="MarketPlace" asp-action="Index">MarketPlace</a>
+                                </li>
+
+                            }
+                            else if (User.IsInRole("Farmer"))
+                            {
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Profile</a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <li><a class="dropdown-item" asp-area="" asp-controller="MyProducts" asp-action="Index">My Products</a></li>
+                                        <li><hr class="dropdown-divider" /></li>
+                                        <li><a class="dropdown-item" asp-area="" asp-controller="MyProducts" asp-action="AddProduct">Add Product</a></li>
+                                    </ul>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-controller="MarketPlace" asp-action="Index">MarketPlace</a>
+                                </li>
+                            }
+                        }
+
                     </ul>
                     <partial name="_LoginPartial" />
+
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+    <div class="d-flex flex-column">
+        <div class="container">
+            <main role="main" class="pb-3 flex-grow-1">
+                @RenderBody()
+            </main>
+        </div>
+
+        <footer class="py-5 bg-dark">
+            <div class="container">
+                <div class="container">
+                    <p class="m-0 text-center text-white"> &copy; 2024 - AgriEnergyConnectPOE - </p>
+                </div>
+            </div>
+        </footer>
     </div>
 
-    <footer class="py-5 bg-dark">
-        <div class="container"><p class="m-0 text-center text-white">Copyright Me, AgriEnergyConnect 2024</p></div>
-    </footer>
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->

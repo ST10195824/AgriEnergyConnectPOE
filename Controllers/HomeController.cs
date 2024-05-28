@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 namespace AgriEnergyConnectPOE.Controllers
 {
-    [Authorize]
+   // [Authorize]
     public class HomeController: Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -16,11 +16,6 @@ namespace AgriEnergyConnectPOE.Controllers
         }
 
         public IActionResult Index()
-        {
-            return View();
-        }
-
-        public IActionResult Privacy()
         {
             return View();
         }
