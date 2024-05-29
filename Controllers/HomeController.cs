@@ -1,6 +1,8 @@
+using AgriEnergyConnectPOE.Data;
 using AgriEnergyConnectPOE.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace AgriEnergyConnectPOE.Controllers
@@ -13,6 +15,7 @@ namespace AgriEnergyConnectPOE.Controllers
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
+           
         }
 
         public IActionResult Index()

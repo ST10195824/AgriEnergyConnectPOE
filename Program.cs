@@ -1,4 +1,5 @@
 using AgriEnergyConnectPOE.Data;
+using AgriEnergyConnectPOE.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -22,7 +23,12 @@ namespace AgriEnergyConnectPOE
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
+
             builder.Services.AddControllersWithViews();
+            builder.Services.AddScoped<IMarketPlace, MarketPlaceService>();
+            builder.Services.AddScoped<ImageService>();
+            builder.Services.AddHttpContextAccessor();
+
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
             var app = builder.Build();

@@ -1,7 +1,68 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-    ViewData["Title"] = "AddProducts";
-}
-<h1>@ViewData["Title"]</h1>
+﻿@using AgriEnergyConnectPOE.Data
+@model NewProductViewModel
+
+<section>
+    <br />
+    <div class="row justify-content-center">
+        <div class="col-md-5 text-center">
+            <h1>New Product Listing</h1>
+            <form asp-action="AddProduct" method="post" enctype="multipart/form-data">
+                <hr />
+                <div class="mb-3">
+                    <label asp-for="ProductName"> <h4 class="text-secondary">Product Name: </h4></label>
+                    <input type="text" class="form-control" asp-for="ProductName" />
+
+                    <span asp-validation-for="ProductName" class="text-danger"></span>
+
+                </div>
+                <div class="mb-3">
+                    <label asp-for="ProductPrice"> <h4 class="text-secondary">Product Price:</h4></label>
+                    <input type="number" class="form-control" asp-for="ProductPrice" />
+
+                    <span asp-validation-for="ProductPrice" class="text-danger"></span>
+
+                </div>
+                <div class="mb-3">
+                    <label asp-for="ProductDescription"> <h4 class="text-secondary">Product Description:</h4></label>
+                    <input type="text" class="form-control" asp-for="ProductDescription" />
+
+                </div>
+                <div class="mb-3">
+                    <label asp-for="ProductionDate"> <h4 class="text-secondary">Production Date:</h4></label>
+                    <input type="date" class="form-control" asp-for="ProductionDate" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
+
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="SelectedCategoryName"> <h4 class="text-secondary">Product Category:</h4></label>
+                    <select asp-for="SelectedCategoryName" class="form-control">
+                        @foreach (var categoryName in Model.CategoryNames)
+                        {
+                            <option value="@categoryName">@categoryName</option>
+                        }
+                    </select>
+
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="SelectedCategoryName"> <h4 class="text-secondary">Product Photo:</h4></label>
+                    <input type="file" class="form-control" name="ImageFile" />
+                </div>
+
+                <button class="btn btn-primary" type="submit">Add Product Listing</button>
+
+
+            </form>
+
+            @section Scripts {
+                @{
+                    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+                }
+            }
+        </div>
+    </div>
+
+    <br />
+    <br />
+
+</section>
