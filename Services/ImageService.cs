@@ -2,11 +2,7 @@
 
 namespace AgriEnergyConnectPOE.Services
 {
-    /// <summary>
-    /// Please note that you'll need to handle the case where the product doesn't exist in the GetImagePathAsync method.
-    /// Also, you'll need to handle the case where the file upload fails in the SaveImageAsync method. 
-    /// This is a basic implementation and might need to be adjusted based on your specific requirements.
-    /// </summary>
+
     public class ImageService
     {
         private readonly ApplicationDbContext _context;

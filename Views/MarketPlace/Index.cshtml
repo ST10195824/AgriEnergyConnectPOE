@@ -8,7 +8,7 @@
     <div class="container px-4 px-lg-5 my-5">
         <div class="text-center text-white">
             <h1 class="display-4 fw-bolder">@ViewData["Title"]</h1>
-            <p class="lead fw-normal text-white-50 mb-0">Connect with your inner agriculture idk</p>
+            <p class="lead fw-normal text-white-50 mb-0">Connect with your inner agriculture</p>
         </div>
     </div>
 </header>
@@ -33,8 +33,16 @@
                             </div>
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto">does something</a></div>
+                                <div class="text-center">
+                                    <a class="btn btn-outline-dark mt-auto" asp-action="IndividualItem" asp-route-id="@product.ProductId">View</a>
+                                </div>
                             </div>
+                           @if( User.IsInRole("Employee"))
+                            {
+                                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                    <div class="text-center"><a class="btn btn-outline-dark mt-auto">Delete</a></div>
+                                </div>
+                            }
                         </div>
                     </div>
                 </div>

@@ -1,0 +1,29 @@
+﻿@using AgriEnergyConnectPOE.Data
+@model Category
+
+<section>
+    <br />
+    <div class="row justify-content-center">
+        <div class="col-md-5 text-center">
+            <form asp-action="AddCategory" method="post" >
+                <hr />
+                <div class="mb-3">
+                    <label asp-for="CategoryName"> <h4 class="text-secondary">Category Name: </h4></label>
+                    <input type="text" class="form-control" asp-for="CategoryName" />
+
+                    <span asp-validation-for="CategoryName" class="text-danger"></span>
+
+                </div>
+                <div class="mb-3">
+                    <label asp-for="CategoryDescription"> <h4 class="text-secondary">Category Description:</h4></label>
+                    <input type="text" class="form-control" asp-for="CategoryDescription" />
+
+                    <span asp-validation-for="CategoryDescription" class="text-danger"></span>
+
+                </div>
+
+                <button class="btn btn-primary" type="submit">Add Category</button>
+            </form>
+        </div>
+    </div>
+</section>

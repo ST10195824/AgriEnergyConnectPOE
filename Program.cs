@@ -25,7 +25,7 @@ namespace AgriEnergyConnectPOE
 
 
             builder.Services.AddControllersWithViews();
-            builder.Services.AddScoped<IMarketPlace, MarketPlaceService>();
+            builder.Services.AddScoped<ICurrentUserSingleton, CurrentUserSingleton>();
             builder.Services.AddScoped<ImageService>();
             builder.Services.AddHttpContextAccessor();
 

@@ -1,29 +1,56 @@
 ﻿using AgriEnergyConnectPOE.Data;
 using AgriEnergyConnectPOE.Models;
 using AgriEnergyConnectPOE.Services;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace AgriEnergyConnectPOE.Controllers
 {
+    [Authorize]
     public class MarketPlaceController: Controller
     {
-        private readonly IMarketPlace _marketPlace;
-        private readonly ImageService _imageService;
-        private readonly ApplicationDbContext _applicationDbContext;
+        private readonly ApplicationUser? _currentUser;
+        private readonly ApplicationDbContext _context;
 
-        public MarketPlaceController(ApplicationDbContext applicationDbContext, IMarketPlace marketPlace, ImageService imageService)
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
+
+
+
+        public MarketPlaceController(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, ApplicationDbContext applicationDbContext, ICurrentUserSingleton currentUser)
         {
-            _applicationDbContext = applicationDbContext;
-            _marketPlace = marketPlace;
-            //might not need this 
-            _imageService = imageService;
+            _context = applicationDbContext;
+            _currentUser = currentUser.CurrentUser;
+            _userManager = userManager;
+            _roleManager = roleManager;
         }
 
-        public IActionResult Index()
-        {
+        public async Task<IActionResult> Index()
+         {
             var ViewModel = new MarketPlaceViewModel();
-            ViewModel.DisplayedProducts = _applicationDbContext.Products.ToList();
+
+            ViewModel.DisplayedProducts = _context.Products.Where(p => p.UserId != _currentUser.Id).ToList();
+
             return View(ViewModel);
         }
+
+        public IActionResult IndividualItem(int id)
+        {
+            var product = _context.Products.FirstOrDefault(p => p.ProductId == id);
+
+
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            var productCategory = _context.Categories.FirstOrDefault(c => c.CategoryId == product.CategoryId);
+            product.Category = productCategory;
+
+            return View("IndividualItem", product);
+        }
+
     }
 }

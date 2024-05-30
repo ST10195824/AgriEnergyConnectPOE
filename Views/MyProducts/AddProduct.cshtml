@@ -25,11 +25,12 @@
                 <div class="mb-3">
                     <label asp-for="ProductDescription"> <h4 class="text-secondary">Product Description:</h4></label>
                     <input type="text" class="form-control" asp-for="ProductDescription" />
-
+                    <span asp-validation-for="ProductDescription" class="text-danger"></span>
                 </div>
                 <div class="mb-3">
                     <label asp-for="ProductionDate"> <h4 class="text-secondary">Production Date:</h4></label>
                     <input type="date" class="form-control" asp-for="ProductionDate" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                    <span asp-validation-for="ProductionDate" class="text-danger"></span>
 
                 </div>
 
@@ -41,6 +42,7 @@
                             <option value="@categoryName">@categoryName</option>
                         }
                     </select>
+                    <span asp-validation-for="SelectedCategoryName" class="text-danger"></span>
 
                 </div>
 
@@ -50,8 +52,6 @@
                 </div>
 
                 <button class="btn btn-primary" type="submit">Add Product Listing</button>
-
-
             </form>
 
             @section Scripts {
