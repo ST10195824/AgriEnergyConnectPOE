@@ -71,6 +71,53 @@ namespace AgriEnergyConnectPOE.Controllers
 
             return View(viewModel);
         }
+
+        public IActionResult FarmerDetails(string id)
+        {
+            var viewModel = new FarmerCreationViewModel();
+            viewModel.FarmersProducts = _context.Products.Where(p => p.UserId == id).ToList();
+            ApplicationUser farmer = (ApplicationUser)_context.Users.FirstOrDefault(u => u.Id == id);
+            if (farmer != null)
+            {
+                viewModel.UserName = farmer.UserName;
+                viewModel.Email = farmer.Email;
+                viewModel.FirstName = farmer.FirstName;
+                viewModel.Surname = farmer.Surname;
+            }
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddFarmer(FarmerCreationViewModel viewModel)
+        {
+           
+                var user = new ApplicationUser
+                {
+                    UserName = viewModel.Email,
+                    Email = viewModel.Email,
+                    FirstName = viewModel.FirstName,
+                    Surname = viewModel.Surname
+                };
+
+                var result = await _userManager.CreateAsync(user, viewModel.Password);
+                if (result.Succeeded)
+                {
+                    await _userManager.AddToRoleAsync(user, "Farmer");
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError(string.Empty, error.Description);
+                    }
+                }
+            
+
+            return View(viewModel);
+        }
+
     }
 
 }

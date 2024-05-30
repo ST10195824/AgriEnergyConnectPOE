@@ -32,47 +32,13 @@
                             </div>
                             <!-- View farmer details -->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" >View</a></div>
+                                <a class="btn btn-outline-dark mt-auto" asp-action="FarmerDetails" asp-route-id="@farmer.Id">View Farmer Details</a>
+                            </div>
                             </div>
                         </div>
                     </div>
-                </div>
             }
         </div>
     </div>
 </section>
-    
-</section>
-<section class="py-5 bg-light">
-    <div class="container px-4 px-lg-5 mt-5">
-        <h2 class="fw-bolder mb-4">Related products</h2>
-        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-            @foreach (var product in Model.DisplayedProducts)
-            {
-                <div class="card h-100">
-                    <!-- Product image-->
-                    <img class="card-img-top" src="@product.ImagePath" />
-                    <!-- Product details-->
-                    <div class="card-body p-4">
-                        <div class="text-center">
-                            <!-- Product name-->
-                            <h5 class="fw-bolder">@product.ProductName</h5>
-                            <!-- Product price-->
-                            R @product.ProductPrice
-                        </div>
-                        <!-- Product actions-->
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto">does something</a></div>
-                        </div>
-                        @if (User.IsInRole("Employee"))
-                        {
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto">View</a></div>
-                            </div>
-                        }
-                    </div>
-                </div>
-            }
-        </div>
-    </div>
-</section>
+FarmerID

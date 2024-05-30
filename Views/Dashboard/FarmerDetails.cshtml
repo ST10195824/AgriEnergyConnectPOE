@@ -1,6 +1,16 @@
 ﻿@model FarmerCreationViewModel
 
-
+@{
+    ViewData["Title"] = "Farmer Details";
+}
+<h1>@ViewData["Title"]</h1>
+<header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">@ViewData["Title"]</h1
+        </div>
+    </div>
+</header>
 
 <section class="py-5">
     <div class="container px-4 px-lg-5 mt-5">
@@ -14,17 +24,37 @@
                             <!-- Farmer full name -->
                             <h5 class="fw-bolder">@Model.FirstName @Model.Surname</h5>
                         </div>
-                        <!-- Farmer actions -->
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto">Do something</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-5 bg-light">
+    <div class="container px-4 px-lg-5 mt-5">
+        <h2 class="fw-bolder mb-4">Related products</h2>
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            @foreach (var product in Model.FarmersProducts)
+            {
+                <div class="card h-100">
+                    <!-- Product image-->
+                    <img class="card-img-top" src="@product.ImagePath" />
+                    <!-- Product details-->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- Product name-->
+                            <h5 class="fw-bolder">@product.ProductName</h5>
+                            <!-- Product price-->
+                            R @product.ProductPrice
                         </div>
-                        <!-- View farmer details -->
+                        <!-- Product actions-->
                         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                             <div class="text-center"><a class="btn btn-outline-dark mt-auto">View</a></div>
                         </div>
                     </div>
                 </div>
-            </div>
+            }
         </div>
     </div>
 </section>
