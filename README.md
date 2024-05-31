@@ -1,6 +1,20 @@
 # AgriEnergyConnectPOE
 
-# AgriEnergyConnectPOE
+
+## Account Credentials:
+
+Farmer Account:
+```
+email: mfrench4444@gmail.com
+password: Mike123@
+```
+
+Employee Account:
+```
+email: admin@admin.com
+password: Admin123@
+```
+
 
 AgriEnergyConnectPOE is a web application designed to facilitate the management of agricultural products and connect farmers with potential buyers. This README file provides step-by-step instructions for setting up the development environment, building, and running the prototype, as well as an overview of the system's functionalities and user roles.
 
@@ -28,35 +42,20 @@ Follow these steps to set up your development environment:
 
 1. **Clone the Repository**
    ```bash
-   git clone https://github.com/your-username/AgriEnergyConnectPOE.git
+   git clone https://github.com/ST10195824/AgriEnergyConnectPOE.git
    cd AgriEnergyConnectPOE
    ```
 
-2. **Set Up the Database**
-   - Create a new SQL Server database.
-   - Update the connection string in `appsettings.json` to match your SQL Server configuration:
-     ```json
-     "ConnectionStrings": {
-       "DefaultConnection": "Server=your_server;Database=AgriEnergyConnect;User Id=your_user;Password=your_password;"
-     }
-     ```
-
-3. **Apply Migrations**
+2. **Apply Migrations**
    Open the terminal in your project directory and run:
    ```bash
    dotnet ef database update
    ```
 
-4. **Restore NuGet Packages**
+3. **Restore NuGet Packages**
    In the terminal, run:
    ```bash
    dotnet restore
-   ```
-
-5. **Install Front-End Dependencies**
-   If your project has front-end dependencies, install them using npm:
-   ```bash
-   npm install
    ```
 
 ## Building and Running the Project (from the Project folder ZIP)

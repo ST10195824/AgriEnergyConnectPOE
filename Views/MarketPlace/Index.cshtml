@@ -13,6 +13,20 @@
     </div>
 </header>
 <br />
+@if(User.IsInRole("Employee"))
+{
+    <form asp-action="SelectCategory" method="post">
+    <label asp-for="@Model.FilterByCategorysList"> <h4 class="text-secondary">Product Category:</h4></label>
+    <select asp-for="@Model.SelectedFilterOption" class="form-control">
+        @foreach (var categoryName in Model.FilterByCategorysList)
+        {
+            <option value="@categoryName">@categoryName</option>
+        }
+    </select>
+    <br />
+        <button class="btn btn-primary" type="submit">Apply Filter</button>
+    </form>
+}
 <section class="py-5">
     <div class="container px-4 px-lg-5 mt-5">
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">

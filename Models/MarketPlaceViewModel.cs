@@ -15,8 +15,7 @@ namespace AgriEnergyConnectPOE.Models
 
         public List<ApplicationUser> DisplayedFarmers { get; set; } = new List<ApplicationUser>();
 
-        public readonly List<string> EmployeeFilterSelector = ["Products", "Farmers"];
-
+        public List<string> FilterByCategorysList { get; set; }
         public string? SelectedFilterOption { get; set; }
     }
 }

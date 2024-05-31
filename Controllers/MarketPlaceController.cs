@@ -46,8 +46,50 @@ namespace AgriEnergyConnectPOE.Controllers
         public async Task<IActionResult> Index()
         {
             var ViewModel = new MarketPlaceViewModel();
-            ViewModel.DisplayedProducts = _context.Products.Where(p => p.UserId != _currentUser.Id).ToList();
+            var selectedFilterOption = TempData["SelectedFilterOption"] as string;
+
+            if (selectedFilterOption == "All" || selectedFilterOption == null)
+            {
+                ViewModel.DisplayedProducts = _context.Products.Where(p => p.UserId != _currentUser.Id).ToList();
+            }
+            else
+            {
+                ViewModel.DisplayedProducts = _context.Products.Where(p => p.UserId != _currentUser.Id
+                    && p.Category.CategoryName == selectedFilterOption).ToList();
+                ViewModel.SelectedFilterOption = (string?)TempData["SelectedFilterOption"];
+            }
+
+            foreach (var product in ViewModel.DisplayedProducts)
+            {
+                product.Category = _context.Categories.FirstOrDefault(c => c.CategoryId == product.CategoryId);
+            }
+
+            if (User.IsInRole("Employee"))
+            {
+                ViewModel.FilterByCategorysList = _context.Categories
+                    .Select(c => c.CategoryName)
+                    .ToList();
+                ViewModel.FilterByCategorysList.Add("All");
+                ViewModel.SelectedFilterOption = "All";
+            }
+
             return View(ViewModel);
+        }
+
+
+        //-------------------------------*Display Individual Item*-------------------------------//
+        /// <summary>
+        /// Displays the details of an individual product.
+        /// </summary>
+        /// <param name="id">The ID of the product.</param>
+        /// <returns>The view containing the details of the product.</returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Employee")]
+        public IActionResult SelectCategory(MarketPlaceViewModel viewModel)
+        {
+            TempData["SelectedFilterOption"] = viewModel.SelectedFilterOption;
+            return RedirectToAction("Index");
         }
 
         //-------------------------------*Display Individual Item*-------------------------------//
