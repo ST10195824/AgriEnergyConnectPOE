@@ -115,11 +115,18 @@ namespace AgriEnergyConnectPOE.Controllers
 
             return RedirectToAction("Index");
         }
+
+        //-------------------------------*Display an Individual Product*-------------------------------//
+        /// <summary>
+        /// Displays the individual product of the farmer.
+        /// </summary>
+        /// <param name="id">The ID of the product.</param>
+        /// <returns>The view containing the individual product.</returns>
         public IActionResult MyIndividualProduct(int id)
         {
             var product = _context.Products.FirstOrDefault(p => p.ProductId == id && p.UserId == _currentUser.Id);
 
-           
+
             if (product == null)
             {
                 return NotFound();
