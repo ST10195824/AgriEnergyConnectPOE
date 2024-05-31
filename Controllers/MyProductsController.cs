@@ -79,11 +79,15 @@ namespace AgriEnergyConnectPOE.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddProduct(NewProductViewModel viewModel, IFormFile ImageFile)
         {
-            if (!ModelState.IsValid)
+            // Check if any required information is missing
+            if (string.IsNullOrEmpty(viewModel.ProductName) ||
+                viewModel.ProductPrice <= 0 ||
+                string.IsNullOrEmpty(viewModel.ProductDescription) ||
+                string.IsNullOrEmpty(viewModel.SelectedCategoryName) ||
+                ImageFile == null)
             {
-                var ViewModel = new NewProductViewModel();
-                ViewModel.CategoryNames = _context.Categories.Select(c => c.CategoryName).ToList();
-                return View(ViewModel);
+                viewModel.CategoryNames = _context.Categories.Select(c => c.CategoryName).ToList();
+                return View(viewModel);
             }
 
             var category = _context.Categories.FirstOrDefault(c => c.CategoryName == viewModel.SelectedCategoryName);
